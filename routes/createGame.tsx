@@ -1,16 +1,18 @@
 import { Handlers } from "$fresh/server.ts";
+import { createNewGame } from "../utils/db.ts";
 
 export const handler: Handlers = {
-  GET(req, ctx) {
+  async GET(req, ctx) {
     const url = new URL(req.url);
     const hangmanWord = url.searchParams.get("q") || "";
 
     if (hangmanWord) {
-      // WE might need to do our logic here for the game system, so we need to create a game ID store it and then path to that game
-      // Should it be a form?
+      // If the user inputs a word we need to first create a game name and store it in deno KV
+      const gameId = crypto.randomUUID();
+      await createNewGame(gameId, hangmanWord);
       return new Response("", {
         status: 307,
-        headers: { Location: `/${hangmanWord}` },
+        headers: { Location: `/${gameId}` },
       });
     } else {
       return ctx.render();

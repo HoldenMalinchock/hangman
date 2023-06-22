@@ -4,13 +4,15 @@
 
 import * as $0 from "./routes/[gameId].tsx";
 import * as $1 from "./routes/createGame.tsx";
-import * as $2 from "./routes/index.tsx";
+import * as $2 from "./routes/games.tsx";
+import * as $3 from "./routes/index.tsx";
 
 const manifest = {
   routes: {
     "./routes/[gameId].tsx": $0,
     "./routes/createGame.tsx": $1,
-    "./routes/index.tsx": $2,
+    "./routes/games.tsx": $2,
+    "./routes/index.tsx": $3,
   },
   islands: {},
   baseUrl: import.meta.url,
