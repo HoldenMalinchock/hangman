@@ -9,7 +9,7 @@ export const handler: Handlers = {
   },
 };
 
-export default function Game(
+export default function Games(
   { data }: PageProps<{ games: any }>,
 ) {
   const t = "c52f32e5-2ca2-41e6-8f09-91a41fadb542";

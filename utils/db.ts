@@ -10,7 +10,7 @@ export async function createNewGame(gameId: string, gameWord: string) {
   return res.ok;
 }
 
-export async function getGame(gameId: string): Promise<Game> {
+export async function getGame(gameId: string): Promise<Game | null> {
   const res = await kv.get<Game>(["game", gameId]);
   return res.value;
 }
