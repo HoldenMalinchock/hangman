@@ -1,6 +1,8 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { getGame } from "../utils/db.ts";
 import { Game } from "../types/Game.ts";
+import Word from "../islands/Word.tsx";
+import Keyboard from "../islands/Keyboard.tsx";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
@@ -18,6 +20,10 @@ export default function Game(
       <div>Game ID: {data.gameId}</div>
       <div>Game Word: {data.game.gameWord}</div>
       <div>Game Status: {data.game.guesses}</div>
+      <div class="max-w-lg">
+        <Keyboard game={data.game} gameId={data.gameId} />
+        <Word game={data.game} gameId={data.gameId} />
+      </div>
     </div>
   );
 }

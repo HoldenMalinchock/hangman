@@ -3,18 +3,27 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $0 from "./routes/[gameId].tsx";
-import * as $1 from "./routes/createGame.tsx";
-import * as $2 from "./routes/games.tsx";
-import * as $3 from "./routes/index.tsx";
+import * as $1 from "./routes/api/alert.ts";
+import * as $2 from "./routes/api/guess.ts";
+import * as $3 from "./routes/createGame.tsx";
+import * as $4 from "./routes/games.tsx";
+import * as $5 from "./routes/index.tsx";
+import * as $$0 from "./islands/Keyboard.tsx";
+import * as $$1 from "./islands/Word.tsx";
 
 const manifest = {
   routes: {
     "./routes/[gameId].tsx": $0,
-    "./routes/createGame.tsx": $1,
-    "./routes/games.tsx": $2,
-    "./routes/index.tsx": $3,
+    "./routes/api/alert.ts": $1,
+    "./routes/api/guess.ts": $2,
+    "./routes/createGame.tsx": $3,
+    "./routes/games.tsx": $4,
+    "./routes/index.tsx": $5,
   },
-  islands: {},
+  islands: {
+    "./islands/Keyboard.tsx": $$0,
+    "./islands/Word.tsx": $$1,
+  },
   baseUrl: import.meta.url,
 };
 
