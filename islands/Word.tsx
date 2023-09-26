@@ -21,7 +21,7 @@ export default function Word(props: { game: Game; gameId: string }) {
       `/api/alert?id=${props.gameId}`,
     );
     eventSource.onmessage = (e) => {
-      const updatedGame = JSON.parse(e.data.updatedGame);
+      const updatedGame = JSON.parse(e.data).updatedGame;
       setGame(updatedGame);
     };
     return () => eventSource.close();

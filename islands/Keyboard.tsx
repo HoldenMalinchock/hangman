@@ -1,6 +1,7 @@
 import { alphabet } from "../utils/alphabet.ts";
 import { Game } from "../types/Game.ts";
 import { Handlers } from "$fresh/server.ts";
+import { useEffect, useState } from "preact/hooks";
 const submitGuessLetter = async (
   letter: string,
   gameId: string,
@@ -10,14 +11,15 @@ const submitGuessLetter = async (
   });
 };
 
-const KeyboardButtons = (gameId: string) => {
+const KeyboardButtons = (game: Game, gameId: string) => {
   return (
     <ul>
       {alphabet.map((letter) => (
         <button
           key={letter}
           onClick={() => submitGuessLetter(letter, gameId)}
-          class="bg-[#DADADA] text-[#1C1E25] rounded-md p-4 m-2"
+          class="bg-[#DADADA] text-[#1C1E25] rounded-md p-4 m-2 disabled:opacity-50"
+          disabled={game.guesses.includes(letter)}
         >
           {letter}
         </button>
@@ -34,9 +36,20 @@ export const handler: Handlers = {
 
 // We are going to need props of what keys we are going to need to disable
 export default function Keyboard(props: { game: Game; gameId: string }) {
+  const [game, setGame] = useState(props.game);
+  useEffect(() => {
+    const eventSource = new EventSource(
+      `/api/alert?id=${props.gameId}`,
+    );
+    eventSource.onmessage = (e) => {
+      const updatedGame = JSON.parse(e.data).updatedGame;
+      setGame(updatedGame);
+    };
+    return () => eventSource.close();
+  }, [props.game]);
   return (
     <div>
-      {KeyboardButtons(props.gameId)}
+      {KeyboardButtons(game, props.gameId)}
     </div>
   );
 }

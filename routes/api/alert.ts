@@ -10,13 +10,13 @@ export const handler: Handlers = {
 
     const body = new ReadableStream({
       start(controller) {
-        controller.enqueue(`retry: 1000\n\n`);
+        // controller.enqueue(`retry: 1000\n\n`);
         cleanup = subscribeGame(gameId, (games) => {
           // I am not sure what all this does right now
           const data = JSON.stringify(games);
           controller.enqueue(`data: ${data}\n\n`);
         });
-        controller.enqueue(`data: ${gameId}\n\n`);
+        // controller.enqueue(`data: ${gameId}\n\n`);
       },
       cancel() {
         cleanup();

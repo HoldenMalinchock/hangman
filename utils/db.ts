@@ -45,11 +45,6 @@ export function subscribeGame(
 ): () => void {
   const bc = new BroadcastChannel(`game/${gameId}`);
   bc.onmessage = (ev) => {
-    console.log(
-      "received game update",
-      gameId,
-      ev.data,
-    );
     cb(ev.data);
   };
   return () => {
