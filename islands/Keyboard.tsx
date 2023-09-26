@@ -2,6 +2,8 @@ import { alphabet } from "../utils/alphabet.ts";
 import { Game } from "../types/Game.ts";
 import { Handlers } from "$fresh/server.ts";
 import { useEffect, useState } from "preact/hooks";
+import { GUESS_LIMIT } from "../utils/constants.ts";
+
 const submitGuessLetter = async (
   letter: string,
   gameId: string,
@@ -12,6 +14,12 @@ const submitGuessLetter = async (
 };
 
 const KeyboardButtons = (game: Game, gameId: string) => {
+  // Get the number of wrong guesses
+  // If the number of wrong guesses is 6, then disable all buttons
+  const wrongGuesses = game.guesses.filter((letter) => {
+    return !game.gameWord.toLowerCase().includes(letter.toLowerCase());
+  }).length;
+
   return (
     <ul>
       {alphabet.map((letter) => (
@@ -19,7 +27,8 @@ const KeyboardButtons = (game: Game, gameId: string) => {
           key={letter}
           onClick={() => submitGuessLetter(letter, gameId)}
           class="bg-[#DADADA] text-[#1C1E25] rounded-md p-4 m-2 disabled:opacity-50"
-          disabled={game.guesses.includes(letter)}
+          disabled={game.guesses.includes(letter) ||
+            wrongGuesses >= GUESS_LIMIT}
         >
           {letter}
         </button>
