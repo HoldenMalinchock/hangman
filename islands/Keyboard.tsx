@@ -1,7 +1,6 @@
 import { alphabet } from "../utils/alphabet.ts";
 import { Game } from "../types/Game.ts";
 import { Handlers } from "$fresh/server.ts";
-import { useEffect } from "preact/hooks";
 const submitGuessLetter = async (
   letter: string,
   gameId: string,

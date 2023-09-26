@@ -32,8 +32,9 @@ export async function submitGuess(
     guesses: currentGame?.guesses.concat(guess) || [],
   });
   if (res.ok) {
+    const updatedGame = await getGame(gameId);
     const bc1 = new BroadcastChannel(`game/${gameId}`);
-    bc1.postMessage({ guess, gameId });
+    bc1.postMessage({ updatedGame, gameId });
     return res;
   }
 }
