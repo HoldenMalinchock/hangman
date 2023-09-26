@@ -29,7 +29,7 @@ export const handler: Handlers = {
         status: 400,
       });
     }
-    const submit = await submitGuess(gameId, guess);
+    await submitGuess(gameId, guess);
 
     return new Response(JSON.stringify(guess), {
       headers: {

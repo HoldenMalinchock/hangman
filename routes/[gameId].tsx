@@ -17,9 +17,6 @@ export default function Game(
 ) {
   return (
     <div class="w-full h-screen flex flex-col items-center bg-[#1C1E25] text-[#DADADA] font-mono">
-      <div>Game ID: {data.gameId}</div>
-      <div>Game Word: {data.game.gameWord}</div>
-      <div>Game Status: {data.game.guesses}</div>
       <div class="max-w-lg">
         <Keyboard game={data.game} gameId={data.gameId} />
         <Word game={data.game} gameId={data.gameId} />
